@@ -15,11 +15,15 @@ setup(
     zip_safe=True,
     maintainer='varad',
     maintainer_email='varadkulk123@gmail.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='Kalman Filter Testing',
+    license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'function_publisher = kalmanplayground.function_publisher:main',
+            'function_subscriber = kalmanplayground.function_subscriber:main',
+            'kalman_filter = kalmanplayground.kalman_filter:main',
+            'eval = kalmanplayground.eval:main'
         ],
     },
 )
