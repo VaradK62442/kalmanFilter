@@ -31,7 +31,7 @@ class FunctionPublisher(Node):
         self.publisher.publish(msg)
         self.get_logger().info(f"Func Publishing: {msg}")
         self.x += self.timer_period
-        
+
 
     def get_function_value(self):
         match self.function:
@@ -41,8 +41,12 @@ class FunctionPublisher(Node):
                 return np.cos(self.x)
             case "tan":
                 return np.tan(self.x)
+            case "x":
+                return self.x
             case "x^2":
                 return self.x * self.x
+            case "x^3":
+                return self.x ** 3
             case "exp":
                 return np.e ** self.x
 
@@ -50,7 +54,7 @@ class FunctionPublisher(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    function_publisher = FunctionPublisher()
+    function_publisher = FunctionPublisher("bessel")
 
     rclpy.spin(function_publisher)
 
