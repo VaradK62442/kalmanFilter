@@ -35,17 +35,22 @@ class KalmanFilter(Node):
 
         self.publisher.publish(msg)
         self.get_logger().info(f"Kalm Publishing: {msg}")
-        
+
 
     def alpha_beta_filter(self, measurement: str) -> str:
         n = self.n
         z_n = float(measurement) # current measurement
         x_n_n1 = self.prediction # prior prediction
-        kalman_gain = 1/n
+        alpha = 1/n # kalman gain
+        beta = 0.9 # reliability of measurements (higher is more reliable)
+        dt = 0.1 # change in time
 
-        new_prediction = x_n_n1 + kalman_gain * (z_n - x_n_n1)
+        new_position = x_n_n1 + alpha * (z_n - x_n_n1)
+        new_velocity = x_n_n1 + beta * ((z_n - x_n_n1) / dt)
+
+        new_prediction = new_position + dt * new_velocity
+
         self.prediction = new_prediction
-
         return str(new_prediction)
 
 
