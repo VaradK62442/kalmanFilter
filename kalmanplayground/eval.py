@@ -6,11 +6,18 @@ Writes all three measurements to a file.
 import rclpy
 from rclpy.node import Node
 
+import os
+
 from std_msgs.msg import String
 
 class Eval(Node):
 
-    def __init__(self, std=0.1):
+    def __init__(self):
+        # delete files if they exist
+        self.file_list = ["function_values.txt", "measurement_values.txt", "kalman_measurement_values.txt"]
+        for file in self.file_list:
+            if os.path.isfile("./" + file): os.remove(file) # definitely safe
+
         super().__init__('function_subscriber')
         self.subscription = self.create_subscription(
             String, 'function_value',
@@ -32,13 +39,13 @@ class Eval(Node):
 
 
     def set_function_val(self, function_value):
-        self.write_to_file("function_vals.txt", function_value)
+        self.write_to_file(self.file_list[0], function_value)
 
     def set_measurement(self, measurement_value):
-        self.write_to_file("measurement_values.txt", measurement_value)
+        self.write_to_file(self.file_list[1], measurement_value)
 
     def set_kalman(self, kalman_measurement):
-        self.write_to_file("kalman_measurement_values.txt", kalman_measurement)
+        self.write_to_file(self.file_list[2], kalman_measurement)
         
 
 

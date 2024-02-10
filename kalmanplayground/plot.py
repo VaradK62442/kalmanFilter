@@ -15,7 +15,7 @@ def read_data_from_file(filename):
 
 
 def main():
-    function_vals = read_data_from_file("function_vals.txt")
+    function_vals = read_data_from_file("function_values.txt")
     measurement_vals = read_data_from_file("measurement_values.txt")
     kalman_vals = read_data_from_file("kalman_measurement_values.txt")
 
