@@ -54,7 +54,7 @@ class FunctionPublisher(Node):
 def main(args=None):
     rclpy.init(args=args)
 
-    function_publisher = FunctionPublisher("bessel")
+    function_publisher = FunctionPublisher()
 
     rclpy.spin(function_publisher)
 

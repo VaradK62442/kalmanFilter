@@ -25,6 +25,7 @@ class KalmanFilter(Node):
         )
         self.n = 0 # how many measurements
         self.prediction = 0 # start prediction at 0
+        self.velocity_prediction = 0
 
 
     def listener_callback(self, measurement_data):
@@ -41,12 +42,14 @@ class KalmanFilter(Node):
         n = self.n
         z_n = float(measurement) # current measurement
         x_n_n1 = self.prediction # prior prediction
-        alpha = 1/n # kalman gain
-        beta = 0.9 # reliability of measurements (higher is more reliable)
+        x_dot_n_n1 = self.velocity_prediction
+        alpha = 0.7
+        beta = 0.05
         dt = 0.1 # change in time
 
         new_position = x_n_n1 + alpha * (z_n - x_n_n1)
-        new_velocity = x_n_n1 + beta * ((z_n - x_n_n1) / dt)
+        new_velocity = x_dot_n_n1 + beta * ((z_n - x_n_n1) / dt) 
+        # TODO: check results from corrected vel and alpha beta values
 
         new_prediction = new_position + dt * new_velocity
 
