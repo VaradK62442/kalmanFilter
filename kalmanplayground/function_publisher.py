@@ -29,7 +29,7 @@ class FunctionPublisher(Node):
         msg.data = str(functionValue)
         
         self.publisher.publish(msg)
-        self.get_logger().info(f"Func Publishing: {msg}")
+        # self.get_logger().info(f"Func Publishing: {msg}")
         self.x += self.timer_period
 
 

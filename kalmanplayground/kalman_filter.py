@@ -35,7 +35,7 @@ class KalmanFilter(Node):
         msg.data = self.alpha_beta_filter(measurement)
 
         self.publisher.publish(msg)
-        self.get_logger().info(f"Kalm Publishing: {msg}")
+        # self.get_logger().info(f"Kalm Publishing: {msg}")
 
 
     def alpha_beta_filter(self, measurement: str) -> str:
@@ -49,7 +49,6 @@ class KalmanFilter(Node):
 
         new_position = x_n_n1 + alpha * (z_n - x_n_n1)
         new_velocity = x_dot_n_n1 + beta * ((z_n - x_n_n1) / dt) 
-        # TODO: check results from corrected vel and alpha beta values
 
         new_prediction = new_position + dt * new_velocity
 

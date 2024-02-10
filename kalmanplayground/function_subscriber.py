@@ -40,7 +40,7 @@ class FunctionSubscriber(Node):
         msg.data = str(measurement)
         
         self.publisher.publish(msg)
-        self.get_logger().info(f"Meas Publishing: {msg}")
+        # self.get_logger().info(f"Meas Publishing: {msg}")
 
 
 def main(args=None):
