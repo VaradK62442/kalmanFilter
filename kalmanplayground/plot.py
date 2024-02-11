@@ -4,6 +4,7 @@ Produces plot of three measurements.
 '''
 
 import matplotlib.pyplot as plt
+import numpy as np
 
 def read_data_from_file(filename):
     data = []
@@ -25,6 +26,11 @@ def main():
     plt.plot(x_vals, function_vals, label="Expected")
     plt.plot(x_vals, measurement_vals, label="Measured")
     plt.plot(x_vals, kalman_vals, label="Kalman")
+
+    kalman_error = np.sqrt(np.mean(np.square(np.array(function_vals) - np.array(kalman_vals)),axis=0))
+    measurement_error = np.sqrt(np.mean(np.square(np.array(function_vals) - np.array(measurement_vals)),axis=0))
+
+    print(f"Kalman error: {kalman_error}\nMeasurement error: {measurement_error}")
 
     plt.legend()
     plt.show()
