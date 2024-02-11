@@ -14,7 +14,7 @@ import numpy as np
 
 class KalmanFilter(Node):
 
-    def __init__(self, std=0.1):
+    def __init__(self):
         super().__init__('function_subscriber')
         self.subscription = self.create_subscription(
             String, 'measurement', 
@@ -71,7 +71,7 @@ class KalmanFilter(Node):
         v_s = v_p + (beta / T) * (x_o - x_p)
 
         a_s = self.accel_prediction
-        gamma = 0.5 # TODO: tune this
+        gamma = 0.001
         a_s = a_s + (gamma / (2 * T * T)) * (x_o - x_p) # new a_s
 
         # new predictions
